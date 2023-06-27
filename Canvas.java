@@ -55,7 +55,7 @@ public class Canvas extends javax.swing.JPanel {
     @Override
     public void paintComponent(java.awt.Graphics g){
         super.paintComponent(g);
-        setBackground(new java.awt.Color(51, 0, 204));
+        setBackground(new java.awt.Color(20, 240, 20));
         kurakura.draw((java.awt.Graphics2D) g);        
     }
     

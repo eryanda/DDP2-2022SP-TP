@@ -1,4 +1,4 @@
-
+import java.lang.Math;
 import java.awt.Dimension;
 
 /**
@@ -60,10 +60,12 @@ public class Perintah {
                 kurakuraku.rotasi(Integer.parseInt(in[1]));
         else if (in[0].equalsIgnoreCase("kotak"))
                 buatKotak(Integer.parseInt(in[1]));
+        else if (in[0].equalsIgnoreCase("persegi")){
+                buatPersegi((Integer.parseInt(in[1])),Integer.parseInt(in[2]));}
         else if (in[0].equalsIgnoreCase("segitiga"))
                 buatSegitiga(Integer.parseInt(in[1]));
-        else if (in[0].equalsIgnoreCase("siku"))
-                buatSegitigaSiku(Integer.parseInt(in[1]));
+        else if (in[0].equalsIgnoreCase("siku")){
+                buatSegitigaSikuSiku((Integer.parseInt(in[1])),Integer.parseInt(in[2]));}     
         else if (in[0].equalsIgnoreCase("pohon"))
                 buatPohon();        
         else if (in[0].equalsIgnoreCase("jejak"))
@@ -84,6 +86,14 @@ public class Perintah {
             kurakuraku.rotasi(90);
         }
     }
+    public void buatPersegi(int panjang, int lebar){     
+            for (int i=0;i<2;i++){
+            kurakuraku.maju(panjang);
+            kurakuraku.rotasi(90);
+            kurakuraku.maju(lebar);
+            kurakuraku.rotasi(90);
+        }   
+    }
     public void buatSegitiga(int ukuran){
         // TODO: Lengkapi isi method ini agar kura-kura bisa membuat segitiga sama sisi
         for (int i=0; i<3 ; i++){
@@ -91,13 +101,15 @@ public class Perintah {
             kurakuraku.rotasi(-120);
         }
     }     
-    public void buatSegitigaSiku(int ukuran){
-    // TODO: Lengkapi isi method ini agar kura-kura bisa membuat segitiga sama sisi
-        kurakuraku.maju(ukuran);
-        kurakuraku.rotasi(-90);
-        kurakuraku.maju(ukuran);
-        kurakuraku.rotasi(-135);
-        kurakuraku.maju(ukuran);
+    public void buatSegitigaSikuSiku(int panjangAlas, int tinggi){    
+    // Menggambar garis miring sebagai sisi miring segitiga
+    int miring = (int) Math.sqrt(Math.pow(panjangAlas, 2) + Math.pow(tinggi, 2));
+    kurakuraku.rotasi(90);
+    kurakuraku.maju(tinggi);
+    kurakuraku.rotasi(-90);
+    kurakuraku.maju(panjangAlas);
+    kurakuraku.rotasi(-135);
+    kurakuraku.maju(miring);
     }
     
     public void buatPohon(){        

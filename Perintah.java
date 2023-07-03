@@ -62,6 +62,8 @@ public class Perintah {
                 buatKotak(Integer.parseInt(in[1]));
         else if (in[0].equalsIgnoreCase("segitiga"))
                 buatSegitiga(Integer.parseInt(in[1]));
+        else if (in[0].equalsIgnoreCase("siku"))
+                buatSegitigaSiku(Integer.parseInt(in[1]));
         else if (in[0].equalsIgnoreCase("pohon"))
                 buatPohon();        
         else if (in[0].equalsIgnoreCase("jejak"))
@@ -84,8 +86,19 @@ public class Perintah {
     }
     public void buatSegitiga(int ukuran){
         // TODO: Lengkapi isi method ini agar kura-kura bisa membuat segitiga sama sisi
-
-    }        
+        for (int i=0; i<3 ; i++){
+            kurakuraku.maju(ukuran);
+            kurakuraku.rotasi(-120);
+        }
+    }     
+    public void buatSegitigaSiku(int ukuran){
+    // TODO: Lengkapi isi method ini agar kura-kura bisa membuat segitiga sama sisi
+        kurakuraku.maju(ukuran);
+        kurakuraku.rotasi(-90);
+        kurakuraku.maju(ukuran);
+        kurakuraku.rotasi(-135);
+        kurakuraku.maju(ukuran);
+    }
     
     public void buatPohon(){        
         kurakuraku.setJejak(false);

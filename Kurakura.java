@@ -99,7 +99,18 @@ public class Kurakura {
     }
     
     public void mundur(double jarak){
-        // TODO: lengkapi method ini untuk tugas 1
+        double dx,dy;
+        dx = -jarak * Math.cos(arah);
+        dy = -jarak * Math.sin(arah); 
+        
+        if (jejak){
+            Graphics2D g = imgJejak.createGraphics();
+            g.draw(new java.awt.geom.Line2D.Double(x,y,x+dx,y+dy));
+        }
+        
+        x += dx;
+        y += dy;
+        matTrans.setToTranslation(x,y);
     }
     
     /** 

@@ -65,7 +65,9 @@ public class Perintah {
         else if (in[0].equalsIgnoreCase("segitiga"))
                 buatSegitiga(Integer.parseInt(in[1]));
         else if (in[0].equalsIgnoreCase("siku")){
-                buatSegitigaSikuSiku((Integer.parseInt(in[1])),Integer.parseInt(in[2]));}     
+                buatSegitigaSikuSiku((Integer.parseInt(in[1])),Integer.parseInt(in[2]));} 
+        else if (in[0].equalsIgnoreCase("loop")){
+                buatLoop((Integer.parseInt(in[1])),Integer.parseInt(in[3]),Integer.parseInt(in[5]));}     
         else if (in[0].equalsIgnoreCase("pohon"))
                 buatPohon();        
         else if (in[0].equalsIgnoreCase("jejak"))
@@ -94,6 +96,13 @@ public class Perintah {
             kurakuraku.rotasi(90);
         }   
     }
+    public void buatLoop(int loop, int rotasi, int pindah){
+        // TODO: Lengkapi isi method ini agar kura-kura bisa membuat segitiga sama sisi
+        for (int i=1; i<=loop ; i++){
+            kurakuraku.rotasi(rotasi);
+            kurakuraku.maju(10);
+        }
+    }    
     public void buatSegitiga(int ukuran){
         // TODO: Lengkapi isi method ini agar kura-kura bisa membuat segitiga sama sisi
         for (int i=0; i<3 ; i++){
@@ -118,8 +127,13 @@ public class Perintah {
         kurakuraku.rotasi(90);
         kurakuraku.maju(100);
         kurakuraku.rotasi(180);
+        Dimension posisiUjungPohon = kurakuraku.getPosition();
         buatPohon(6,50);        
         kurakuraku.reset();
+        // Tambahkan perintah untuk membuat kotak di ujung pohon
+        kurakuraku.setPosition(posisiUjungPohon);
+        kurakuraku.maju(50); // Pindah ke ujung pohon
+        buatKotak(30); // Buat kotak di ujung pohon dengan ukuran 30
     }
     
     private void buatPohon(int ukuran, int tinggi){
@@ -134,6 +148,7 @@ public class Perintah {
                 buatPohon(ukuran-1,(int)(tinggi/1.5));
                 kurakuraku.setJejak(false);
                 kurakuraku.setPosition(posAwal);
+                
                 kurakuraku.setArah(arah);                
                 sudut+=45;
                 kurakuraku.rotasi(sudut);  

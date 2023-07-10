@@ -60,12 +60,16 @@ public class Perintah {
                 kurakuraku.rotasi(Integer.parseInt(in[1]));
         else if (in[0].equalsIgnoreCase("kotak"))
                 buatKotak(Integer.parseInt(in[1]));
-        else if (in[0].equalsIgnoreCase("kotakrecc"))
-                buatKotakRecc(Integer.parseInt(in[1]));
+        else if (in[0].equalsIgnoreCase("boxes"))
+                buatBoxes(Integer.parseInt(in[1]));
+        else if (in[0].equalsIgnoreCase("fractal"))
+                buatCustomFractal(Integer.parseInt(in[1]));
         else if (in[0].equalsIgnoreCase("persegi")){
                 buatPersegi((Integer.parseInt(in[1])),Integer.parseInt(in[2]));}
         else if (in[0].equalsIgnoreCase("segitiga"))
                 buatSegitiga(Integer.parseInt(in[1]));
+        else if (in[0].equalsIgnoreCase("sierpinski"))
+                buatSierpinski(Integer.parseInt(in[1]));
         else if (in[0].equalsIgnoreCase("siku")){
                 buatSegitigaSikuSiku((Integer.parseInt(in[1])),Integer.parseInt(in[2]));} 
         else if (in[0].equalsIgnoreCase("loop")){
@@ -91,21 +95,43 @@ public class Perintah {
         }
     }
 
-    public void buatKotakRecc (int ukuran){
+    public void buatBoxes (int ukuran){
         buatKotak(ukuran);
         if (ukuran < 40){kurakuraku.reset();}
         else{
             kurakuraku.setJejak(false);
             kurakuraku.maju(ukuran/8);
             kurakuraku.rotasi(90);
-            kurakuraku.maju(ukuran/8);
+            kurakuraku.maju(ukuran/8);  
             kurakuraku.rotasi(-90);
             kurakuraku.setJejak(true);
-            buatKotakRecc(ukuran - ((ukuran/8)*2));
-        }
-
+            buatBoxes(ukuran - ((ukuran/8)*2));
+        }        
     }
-    
+
+    public void buatCustomFractal (int ukuran){
+
+        for (int i=1; i<=3; i++){
+            buatCustomFractalrecc(ukuran);
+            kurakuraku.rotasi(120);
+        }
+    }
+
+    public void buatCustomFractalrecc (int ukuran){
+        if (ukuran<3){
+            kurakuraku.maju(ukuran);
+        }
+        else{
+            buatCustomFractalrecc(ukuran/3);
+            kurakuraku.rotasi(-60);
+            buatCustomFractalrecc(ukuran/3);
+            kurakuraku.rotasi(120);
+            buatCustomFractalrecc(ukuran/3);
+            kurakuraku.rotasi(-60);
+            buatCustomFractalrecc(ukuran/3);
+        }
+    }
+
     public void buatPersegi(int panjang, int lebar){     
             for (int i=0;i<2;i++){
             kurakuraku.maju(panjang);
@@ -127,7 +153,36 @@ public class Perintah {
             kurakuraku.maju(ukuran);
             kurakuraku.rotasi(-120);
         }
-    }     
+    }    
+
+    public void buatSierpinski(int ukuran) {
+        buatSegitiga(ukuran);
+        kurakuraku.maju(ukuran/2);
+        buatSierpinskirecc(ukuran/2);
+    }
+
+    public void buatSierpinskirecc(int ukuran) {
+        if(ukuran>20){
+            kurakuraku.rotasi(-60);
+            buatSegitiga(ukuran);
+            kurakuraku.rotasi(60);
+            Dimension pos = kurakuraku.getPosition();
+            kurakuraku.maju(ukuran/2);
+            buatSierpinskirecc(ukuran/2); // bagian kanan
+            kurakuraku.reset();
+            kurakuraku.setPosition(pos);
+            kurakuraku.mundur(ukuran/2);
+            buatSierpinskirecc(ukuran/2); //bagian kiri
+            kurakuraku.reset();
+            kurakuraku.setPosition(pos);
+            kurakuraku.rotasi(-60);
+            kurakuraku.maju(ukuran);
+            kurakuraku.rotasi(-120);
+            kurakuraku.maju(ukuran/2);
+            kurakuraku.rotasi(180);
+            buatSierpinskirecc(ukuran/2); //bagian atas
+        }
+    }
 
     public void buatSegitigaSikuSiku(int panjangAlas, int tinggi){    
     // Menggambar garis miring sebagai sisi miring segitiga
@@ -164,10 +219,8 @@ public class Perintah {
             double sudut = arah;
             for(int i=0;i<3;i++){  
                 buatPohon(ukuran-1,(int)(tinggi/1.5));
-                buatKotak(30); // Buat kotak di ujung pohon dengan ukuran 30
                 kurakuraku.setJejak(false);
                 kurakuraku.setPosition(posAwal);
-                
                 kurakuraku.setArah(arah);                
                 sudut+=45;
                 kurakuraku.rotasi(sudut);  

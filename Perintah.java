@@ -60,6 +60,8 @@ public class Perintah {
                 kurakuraku.rotasi(Integer.parseInt(in[1]));
         else if (in[0].equalsIgnoreCase("kotak"))
                 buatKotak(Integer.parseInt(in[1]));
+        else if (in[0].equalsIgnoreCase("kotakrecc"))
+                buatKotakRecc(Integer.parseInt(in[1]));
         else if (in[0].equalsIgnoreCase("persegi")){
                 buatPersegi((Integer.parseInt(in[1])),Integer.parseInt(in[2]));}
         else if (in[0].equalsIgnoreCase("segitiga"))
@@ -88,6 +90,22 @@ public class Perintah {
             kurakuraku.rotasi(90);
         }
     }
+
+    public void buatKotakRecc (int ukuran){
+        buatKotak(ukuran);
+        if (ukuran < 40){kurakuraku.reset();}
+        else{
+            kurakuraku.setJejak(false);
+            kurakuraku.maju(ukuran/8);
+            kurakuraku.rotasi(90);
+            kurakuraku.maju(ukuran/8);
+            kurakuraku.rotasi(-90);
+            kurakuraku.setJejak(true);
+            buatKotakRecc(ukuran - ((ukuran/8)*2));
+        }
+
+    }
+    
     public void buatPersegi(int panjang, int lebar){     
             for (int i=0;i<2;i++){
             kurakuraku.maju(panjang);
@@ -110,6 +128,7 @@ public class Perintah {
             kurakuraku.rotasi(-120);
         }
     }     
+
     public void buatSegitigaSikuSiku(int panjangAlas, int tinggi){    
     // Menggambar garis miring sebagai sisi miring segitiga
     int miring = (int) Math.sqrt(Math.pow(panjangAlas, 2) + Math.pow(tinggi, 2));
@@ -133,7 +152,6 @@ public class Perintah {
         // Tambahkan perintah untuk membuat kotak di ujung pohon
         kurakuraku.setPosition(posisiUjungPohon);
         kurakuraku.maju(50); // Pindah ke ujung pohon
-        buatKotak(30); // Buat kotak di ujung pohon dengan ukuran 30
     }
     
     private void buatPohon(int ukuran, int tinggi){
@@ -146,6 +164,7 @@ public class Perintah {
             double sudut = arah;
             for(int i=0;i<3;i++){  
                 buatPohon(ukuran-1,(int)(tinggi/1.5));
+                buatKotak(30); // Buat kotak di ujung pohon dengan ukuran 30
                 kurakuraku.setJejak(false);
                 kurakuraku.setPosition(posAwal);
                 
@@ -157,3 +176,4 @@ public class Perintah {
         kurakuraku.reset();
     }
 }
+

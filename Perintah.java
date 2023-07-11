@@ -109,26 +109,19 @@ public class Perintah {
         }        
     }
 
+    int i = 0;
     public void buatCustomFractal (int ukuran){
-
-        for (int i=1; i<=3; i++){
-            buatCustomFractalrecc(ukuran);
+        if (i < 3){
+            i ++;
             kurakuraku.rotasi(120);
-        }
-    }
-
-    public void buatCustomFractalrecc (int ukuran){
-        if (ukuran<3){
             kurakuraku.maju(ukuran);
-        }
-        else{
-            buatCustomFractalrecc(ukuran/3);
             kurakuraku.rotasi(-60);
-            buatCustomFractalrecc(ukuran/3);
+            kurakuraku.maju(ukuran);
             kurakuraku.rotasi(120);
-            buatCustomFractalrecc(ukuran/3);
+            kurakuraku.maju(ukuran);
             kurakuraku.rotasi(-60);
-            buatCustomFractalrecc(ukuran/3);
+            kurakuraku.maju(ukuran);
+            buatCustomFractal(ukuran);
         }
     }
 
@@ -168,11 +161,11 @@ public class Perintah {
             kurakuraku.rotasi(60);
             Dimension pos = kurakuraku.getPosition();
             kurakuraku.maju(ukuran/2);
-            buatSierpinskirecc(ukuran/2); // bagian kanan
+            buatSierpinskirecc(ukuran/2); /*  ini untuk merekursif bagian kanan */
             kurakuraku.reset();
             kurakuraku.setPosition(pos);
             kurakuraku.mundur(ukuran/2);
-            buatSierpinskirecc(ukuran/2); //bagian kiri
+            buatSierpinskirecc(ukuran/2); /* ini untuk merekursif bagian kiri */  
             kurakuraku.reset();
             kurakuraku.setPosition(pos);
             kurakuraku.rotasi(-60);
@@ -180,7 +173,7 @@ public class Perintah {
             kurakuraku.rotasi(-120);
             kurakuraku.maju(ukuran/2);
             kurakuraku.rotasi(180);
-            buatSierpinskirecc(ukuran/2); //bagian atas
+            buatSierpinskirecc(ukuran/2); /* ini untuk merekursif bagian atas */ 
         }
     }
 

@@ -95,7 +95,7 @@ public class Perintah {
         }
     }
 
-    public void buatBoxes (int ukuran){
+    public void buatBoxes (int ukuran){ /** method yang membuat boxes */
         buatKotak(ukuran);
         if (ukuran < 40){kurakuraku.reset();}
         else{
@@ -110,7 +110,7 @@ public class Perintah {
     }
 
     int i = 0;
-    public void buatCustomFractal (int ukuran){
+    public void buatCustomFractal (int ukuran){ /** method yang membuat custom fractal */
         if (i < 3){
             i ++;
             kurakuraku.rotasi(120);
@@ -148,7 +148,7 @@ public class Perintah {
         }
     }    
 
-    public void buatSierpinski(int ukuran) {
+    public void buatSierpinski(int ukuran) { /** method yang membuat sierpinski */
         buatSegitiga(ukuran);
         kurakuraku.maju(ukuran/2);
         buatSierpinskirecc(ukuran/2);
@@ -161,11 +161,11 @@ public class Perintah {
             kurakuraku.rotasi(60);
             Dimension pos = kurakuraku.getPosition();
             kurakuraku.maju(ukuran/2);
-            buatSierpinskirecc(ukuran/2); /*  ini untuk merekursif bagian kanan */
+            buatSierpinskirecc(ukuran/2); /**  ini untuk merekursif bagian kanan */
             kurakuraku.reset();
             kurakuraku.setPosition(pos);
             kurakuraku.mundur(ukuran/2);
-            buatSierpinskirecc(ukuran/2); /* ini untuk merekursif bagian kiri */  
+            buatSierpinskirecc(ukuran/2); /** ini untuk merekursif bagian kiri */  
             kurakuraku.reset();
             kurakuraku.setPosition(pos);
             kurakuraku.rotasi(-60);
@@ -173,12 +173,12 @@ public class Perintah {
             kurakuraku.rotasi(-120);
             kurakuraku.maju(ukuran/2);
             kurakuraku.rotasi(180);
-            buatSierpinskirecc(ukuran/2); /* ini untuk merekursif bagian atas */ 
+            buatSierpinskirecc(ukuran/2); /** ini untuk merekursif bagian atas */ 
         }
     }
 
     public void buatSegitigaSikuSiku(int panjangAlas, int tinggi){    
-    // Menggambar garis miring sebagai sisi miring segitiga
+    /**  Menggambar garis miring sebagai sisi miring segitiga */
     int miring = (int) Math.sqrt(Math.pow(panjangAlas, 2) + Math.pow(tinggi, 2));
     kurakuraku.rotasi(90);
     kurakuraku.maju(tinggi);
